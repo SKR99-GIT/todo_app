@@ -3,25 +3,30 @@ import { CgNotes } from "react-icons/cg";
 import { FaStar } from "react-icons/fa";
 import { MdIncompleteCircle } from "react-icons/md";
 import { FaCheckCircle } from "react-icons/fa";
+import { Link } from 'react-router-dom';
 
 
 const Sidebar = () => {
     const data=[
         {
             title: "All Tasks",
-            icons: <CgNotes />
+            icons: <CgNotes />,
+            link: "/"
         },
         {
             title: "Important Tasks",
-            icons: <FaStar />
+            icons: <FaStar />,
+            link: "/importanttasks"
         },
         {
             title: "Incompleted Tasks",
-            icons: <MdIncompleteCircle />
+            icons: <MdIncompleteCircle />,
+            link: "/incompletetasks"
         },
         {
             title: "Completed Tasks",
-            icons: <FaCheckCircle />
+            icons: <FaCheckCircle />,
+            link: "/completetasks"
         },
     ];
   return (
@@ -33,9 +38,9 @@ const Sidebar = () => {
         </div>
         <div>
             {data.map((items, i) => (
-                <div className='my-2 flex items-center'>
+                <Link to={items.link} key={i} className='my-2 flex items-center hover:bg-gray-600 p-2 rounded transition-all duration-300'>
                     {items.icons} &nbsp; {items.title}
-                </div>
+                </Link>
             ))}
         </div>
         <div><button className='bg-gray-600 w-full p-2 rounded'>Log Out</button></div>
