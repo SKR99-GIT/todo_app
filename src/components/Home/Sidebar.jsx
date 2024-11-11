@@ -1,5 +1,5 @@
 import React from 'react'
-import { CgNotes } from "react-icons/cg";
+import { FaTasks } from "react-icons/fa";
 import { FaStar } from "react-icons/fa";
 import { MdIncompleteCircle } from "react-icons/md";
 import { FaCheckCircle } from "react-icons/fa";
@@ -10,7 +10,7 @@ const Sidebar = () => {
     const data=[
         {
             title: "All Tasks",
-            icons: <CgNotes />,
+            icons: <FaTasks />,
             link: "/"
         },
         {
