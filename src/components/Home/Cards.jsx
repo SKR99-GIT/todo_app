@@ -5,7 +5,7 @@ import { MdDeleteOutline } from "react-icons/md";
 import { IoMdAddCircleOutline } from "react-icons/io";
 import { useState } from 'react';
 
-const Cards = ({home}) => {
+const Cards = ({home, setInputDiv}) => {
     const data = [
         {
             title: "Test 1",
@@ -52,9 +52,9 @@ const Cards = ({home}) => {
             </div>
         ))}
         {home === "true" && (
-            <div className='flex flex-col justify-center items-center bg-gray-800 rounded-sm p-4 text-gray-300 hover:cursor-pointer hover:scale-105 transition-all duration-300'> <IoMdAddCircleOutline className='text-5xl' />
+            <button className='flex flex-col justify-center items-center bg-gray-800 rounded-sm p-4 text-gray-300 hover:cursor-pointer hover:scale-105 transition-all duration-300' onClick={()=>setInputDiv("fixed")}> <IoMdAddCircleOutline className='text-5xl' />
             <h2 className='text-2xl mt-4'>Add Task</h2>
-        </div>
+        </button>
         )}
     </div>
   )
