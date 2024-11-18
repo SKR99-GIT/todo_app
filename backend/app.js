@@ -3,9 +3,11 @@ const app = express();
 require("./connection/conn");
 const cors = require("cors");
 const UserAPI = require("./routes/user")
+const TaskAPI = require("./routes/task")
 app.use(cors());
 app.use(express.json());
 app.use("/api/v1", UserAPI);
+app.use("/api/v1", TaskAPI);
 
 //localhost:1000/api/v1/sign-in
 app.use("/", (req, res) => {
