@@ -1,14 +1,17 @@
-import React from 'react'
-import Home from './pages/Home'
-import { BrowserRouter as Router, Routes, Route } from 'react-router-dom'
+import React from "react";
+import Home from "./pages/Home";
 import Alltasks from './pages/Alltasks'
 import Importanttasks from './pages/Importanttasks'
 import Incompletetasks from './pages/Incompletetasks'
 import Completetasks from './pages/Completetasks'
-import Signup from './pages/Signup'
-import Login from './pages/Login'
+import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import Signup from "./pages/Signup";
+import Login from "./pages/Login";
+import { useSelector } from "react-redux";
 
 const App = () => {
+  const isLoggedIn = useSelector((state) => state.auth.isLoggedIn);
+  console.log(isLoggedIn);
   return (
     <div className='bg-gray-900 text-white h-screen p-2 relative'>
       <Router>
