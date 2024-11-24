@@ -5,35 +5,14 @@ import { MdDeleteOutline } from "react-icons/md";
 import { IoMdAddCircleOutline } from "react-icons/io";
 import { useState } from 'react';
 
-const Cards = ({home, setInputDiv}) => {
-    const data = [
-        {
-            title: "Test 1",
-            desc: "Test D1",
-            status: "Complete"
-        },
-        {
-            title: "Test 2",
-            desc: "Test D2",
-            status: "Incomplete"
-        },
-        {
-            title: "Test 3",
-            desc: "Test D3",
-            status: "Incomplete"
-        },
-        {
-            title: "Test 4",
-            desc: "Test D4",
-            status: "Complete"
-        },
-    ];
+const Cards = ({home, setInputDiv, data}) => {
 
-    const [ImportantButton, setImportantButton] = useState("Incomplete")
+   const [ImportantButton, setImportantButton] = useState("Incomplete")
 
   return (
     <div className='grid grid-cols-3 gap-4 p-4'>
-        {data && data.map((items, i) => (
+        {data && 
+        data.map((items, i) => (
             <div className='flex flex-col justify-between bg-gray-800 rounded-sm p-4'>
             <div>
                 <h3 className='text-xl font-semibold'>{items.title}</h3>

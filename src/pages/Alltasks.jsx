@@ -1,11 +1,27 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import Cards from '../components/Home/Cards'
 import { IoMdAddCircleOutline } from "react-icons/io";
 import InputData from '../components/Home/InputData';
-import { useState } from 'react';
+import axios from 'axios';
 
 const Alltasks = () => {
+
   const [InputDiv, setInputDiv] = useState("hidden")
+  const [Data, setData] = useState(); 
+  const headers = {
+    id:localStorage.getItem("id"), 
+    authorization: `Bearer ${localStorage.getItem("token")}`
+  };
+
+  useEffect(() => {
+    const fetch = async () => {
+    const response =  await axios.get("http://localhost:1000/api/v2/get-all-tasks", {headers});
+    setData(response.data.data); 
+    }
+  fetch();
+  }, [])
+Data && console.log(Data.tasks);
+
   return (
     <>
     <div>
@@ -14,7 +30,8 @@ const Alltasks = () => {
           <IoMdAddCircleOutline className='text-4xl text-gray-400 hover:text-gray-100 transition-all duration-300'/>
         </button>
       </div>
-      <Cards home={"true"} setInputDiv={setInputDiv}/>
+      { Data && (
+      <Cards home={"true"} setInputDiv={setInputDiv} data={Data.tasks}/>)}
     </div>
     <InputData InputDiv={InputDiv} setInputDiv={setInputDiv}/>
     </>
