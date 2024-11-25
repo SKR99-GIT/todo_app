@@ -8,6 +8,8 @@ const Alltasks = () => {
 
   const [InputDiv, setInputDiv] = useState("hidden")
   const [Data, setData] = useState(); 
+  const [UpdatedData, setUpdatedData] = useState({id:"", title:"", desc:""}); 
+
   const headers = {
     id:localStorage.getItem("id"), 
     authorization: `Bearer ${localStorage.getItem("token")}`
@@ -18,9 +20,10 @@ const Alltasks = () => {
     const response =  await axios.get("http://localhost:1000/api/v2/get-all-tasks", {headers});
     setData(response.data.data); 
     }
-  fetch();
-  }, [])
-Data && console.log(Data.tasks);
+    if (localStorage.getItem("id") && localStorage.getItem("token")) {
+      fetch();
+    }
+  });
 
   return (
     <>
@@ -31,9 +34,9 @@ Data && console.log(Data.tasks);
         </button>
       </div>
       { Data && (
-      <Cards home={"true"} setInputDiv={setInputDiv} data={Data.tasks}/>)}
+      <Cards home={"true"} setInputDiv={setInputDiv} data={Data.tasks} setUpdatedData={setUpdatedData}/>)}
     </div>
-    <InputData InputDiv={InputDiv} setInputDiv={setInputDiv}/>
+    <InputData InputDiv={InputDiv} setInputDiv={setInputDiv} UpdatedData={UpdatedData} setUpdatedData={setUpdatedData}/>
     </>
   )
 }

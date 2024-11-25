@@ -1,13 +1,51 @@
 import React from 'react'
 import { CiStar } from "react-icons/ci";
+import { FaStar } from "react-icons/fa";
 import { BiEdit } from "react-icons/bi";
 import { MdDeleteOutline } from "react-icons/md";
 import { IoMdAddCircleOutline } from "react-icons/io";
 import { useState } from 'react';
+import axios from 'axios';
 
-const Cards = ({home, setInputDiv, data}) => {
-
-   const [ImportantButton, setImportantButton] = useState("Incomplete")
+const Cards = ({home, setInputDiv, data, setUpdatedData}) => {
+    const headers = {
+        id:localStorage.getItem("id"), 
+        authorization: `Bearer ${localStorage.getItem("token")}`
+      };
+   const handleComTasks = async (id) => {
+    try {
+        const response = await axios.put(`http://localhost:1000/api/v2/update-com-task/${id}`, 
+        {},
+        {headers});
+        alert(response.data.message);
+        
+    } catch (error) {
+        console.log(error);
+    }
+   }
+   const handleImpTasks = async (id) => {
+    try {
+        const response = await axios.put(`http://localhost:1000/api/v2/update-imp-task/${id}`, 
+        {},
+        {headers});
+        console.log(response);    
+    } catch (error) {
+        console.log(error);
+    }
+   }
+   const handleEdit = (id,title,desc) => {
+    setInputDiv("fixed");
+    setUpdatedData({id:id, title:title, desc:desc})
+   }
+   const deleteTasks = async (id) => {
+    try {
+        const response = await axios.delete(`http://localhost:1000/api/v2/delete-task/${id}`, 
+        {headers});
+        alert(response.data.message);   
+    } catch (error) {
+        console.log(error);
+    }
+   }
 
   return (
     <div className='grid grid-cols-3 gap-4 p-4'>
@@ -19,13 +57,19 @@ const Cards = ({home, setInputDiv, data}) => {
                 <p className='text-gray-300 my-2'>{items.desc}</p>
             </div>
             <div className='mt-4 w-full flex items-center'>
-                    <button className={`${items.status === "Complete" ? "bg-green-500" : "bg-orange-500" }  p-2 rounded`}>
-                        {items.status}
+                    <button className={`${items.complete === false ? "bg-orange-500" : "bg-green-500" }  p-2 rounded`}
+                    onClick={()=>handleComTasks(items._id)}
+                    >
+                        {items.complete === true ? "Completed" : "In-Completed"}
                     </button>
                     <div className='text-white p-2 w-3/6 text-2xl font-semibold flex justify-around'>
-                        <button><CiStar /></button>
-                        <button><BiEdit /></button>
-                        <button><MdDeleteOutline /></button>
+                        <button onClick={()=>handleImpTasks(items._id)}>
+                            {items.important === false ? (<CiStar />) : (<FaStar className='text-yellow-400'/>)}
+                        </button>
+
+                        {home !== "false" && <button onClick={()=>handleEdit(items._id, items.title, items.desc)}><BiEdit /></button>}
+
+                        <button onClick={()=>deleteTasks(items._id)}><MdDeleteOutline /></button>
                     </div>
             </div>
             </div>
