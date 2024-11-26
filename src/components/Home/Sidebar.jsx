@@ -71,7 +71,7 @@ const Sidebar = () => {
                 </Link>
             ))}
         </div>
-        <div><button className='bg-gray-600 w-full p-2 rounded' onClick={logout}>Log Out</button></div>
+        <div><button className='bg-red-800 w-full p-2 rounded  hover:bg-red-900 hover:transition-all duration-300' onClick={logout}>Log Out</button></div>
     </>
   )
 }

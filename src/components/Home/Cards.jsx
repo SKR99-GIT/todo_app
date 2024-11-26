@@ -51,31 +51,31 @@ const Cards = ({home, setInputDiv, data, setUpdatedData}) => {
     <div className='grid grid-cols-3 gap-4 p-4'>
         {data && 
         data.map((items, i) => (
-            <div className='flex flex-col justify-between bg-gray-800 rounded-sm p-4'>
+            <div className='flex flex-col justify-between bg-gray-700 rounded-md p-4 hover:rounded-2xl transition-all duration-300 hover:bg-gray-800'>
             <div>
-                <h3 className='text-xl font-semibold'>{items.title}</h3>
-                <p className='text-gray-300 my-2'>{items.desc}</p>
+                <h3 className='text-xl text-gray-300 font-semibold'>{items.title}</h3>
+                <p className='text-gray-400 my-2'>{items.desc}</p>
             </div>
             <div className='mt-4 w-full flex items-center'>
-                    <button className={`${items.complete === false ? "bg-orange-500" : "bg-green-500" }  p-2 rounded`}
+                    <button className={`${items.complete === false ? "bg-orange-500 hover:bg-orange-600 hover:scale-105 transition-all duration-300" : "bg-green-500  hover:bg-green-600 hover:scale-105 transition-all duration-300" }  p-2 rounded`}
                     onClick={()=>handleComTasks(items._id)}
                     >
-                        {items.complete === true ? "Completed" : "In-Completed"}
+                    {items.complete === true ? "Completed" : "In-Completed"}
                     </button>
                     <div className='text-white p-2 w-3/6 text-2xl font-semibold flex justify-around'>
-                        <button onClick={()=>handleImpTasks(items._id)}>
+                        <button className='hover:scale-125 transition-all duration-300' onClick={()=>handleImpTasks(items._id)}>
                             {items.important === false ? (<CiStar />) : (<FaStar className='text-yellow-400'/>)}
                         </button>
 
-                        {home !== "false" && <button onClick={()=>handleEdit(items._id, items.title, items.desc)}><BiEdit /></button>}
+                        {home !== "false" && <button className='hover:scale-125 transition-all duration-300' onClick={()=>handleEdit(items._id, items.title, items.desc)}><BiEdit /></button>}
 
-                        <button onClick={()=>deleteTasks(items._id)}><MdDeleteOutline /></button>
+                        <button className='hover:scale-125 transition-all duration-300' onClick={()=>deleteTasks(items._id)}><MdDeleteOutline /></button>
                     </div>
             </div>
             </div>
         ))}
         {home === "true" && (
-            <button className='flex flex-col justify-center items-center bg-gray-800 rounded-sm p-4 text-gray-300 hover:cursor-pointer hover:scale-105 transition-all duration-300' onClick={()=>setInputDiv("fixed")}> <IoMdAddCircleOutline className='text-5xl' />
+            <button className='flex flex-col justify-center items-center bg-gray-800 rounded-md p-4 text-gray-300 hover:cursor-pointer hover:scale-105 transition-all duration-300' onClick={()=>setInputDiv("fixed")}> <IoMdAddCircleOutline className='text-5xl' />
             <h2 className='text-2xl mt-4'>Add Task</h2>
         </button>
         )}
